@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Amir Hossein Shahedi — Portfolio</title>
+  <meta name="description" content="پرتفوی امیرحسین شاهدی — توسعه‌دهنده بک‌اند، DevOps و نقشه‌محور (GIS)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-primary: #0a1628;
+      --bg-secondary: #0f1d35;
+      --bg-card: rgba(15, 29, 53, 0.6);
+      --accent: #00f5d4;
+      --accent-dim: #00d9bb;
+      --text-primary: #e8f4f8;
+      --text-secondary: #8ea8c3;
+      --border: rgba(0, 245, 212, 0.1);
+      --glow: rgba(0, 245, 212, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0a1628 0%, #0d1b2e 50%, #08141f 100%);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.4;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+      top: -250px;
+      right: -200px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #1e90ff 0%, transparent 70%);
+      bottom: -200px;
+      left: -150px;
+      animation-delay: -7s;
+    }
+
+    .orb-3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #9d4edd 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    /* Container */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-wrap: wrap;
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--accent) 0%, #1e90ff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px var(--glow);
+      position: relative;
+      overflow: hidden;
+      padding: 8px;
+    }
+
+    .avatar svg {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+    }
+
+    .avatar::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .header-info {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: rgba(0, 245, 212, 0.1);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--glow);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px) saturate(180%);
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-dim);
+      box-shadow: 0 12px 48px rgba(0, 245, 212, 0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+
+    h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    p {
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    section {
+      margin-top: 24px;
+    }
+
+    section:first-child {
+      margin-top: 0;
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .skill {
+      background: linear-gradient(135deg, rgba(0, 245, 212, 0.1), rgba(30, 144, 255, 0.05));
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      color: var(--text-primary);
+    }
+
+    .skill:hover {
+      background: linear-gradient(135deg, rgba(0, 245, 212, 0.2), rgba(30, 144, 255, 0.1));
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Projects */
+    .projects {
+      list-style: none;
+      padding: 0;
+    }
+
+    .projects li {
+      margin-bottom: 16px;
+      padding: 16px;
+      background: rgba(0, 245, 212, 0.03);
+      border-radius: 12px;
+      border-right: 3px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .projects li:hover {
+      background: rgba(0, 245, 212, 0.08);
+      transform: translateX(-4px);
+    }
+
+    .projects strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Tech Logos */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .tech-item {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 245, 212, 0.03);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tech-item:hover {
+      background: rgba(0, 245, 212, 0.08);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .tech-item img {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 4px 8px rgba(0, 245, 212, 0.3));
+      transition: all 0.3s ease;
+    }
+
+    .tech-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .tech-item div {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Two Column Grid */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    /* Links */
+    .link {
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .link:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 48px;
+      padding: 32px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-main > * {
+      animation-delay: 0.1s;
+    }
+
+    aside > * {
+      animation-delay: 0.2s;
+    }
+
+    .two-col > * {
+      animation-delay: 0.3s;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        text-align: center;
+        flex-direction: column;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-dim);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 16px 0;
+    }
+
+    code {
+      background: rgba(0, 245, 212, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="avatar">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#00f5d4;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#1e90ff;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#9d4edd;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#00f5d4;stop-opacity:0.9" />
+              <stop offset="100%" style="stop-color:#0a1628;stop-opacity:0.9" />
+            </linearGradient>
+            <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#00f5d4;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:#1e90ff;stop-opacity:0.3" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="shadow">
+              <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00f5d4" flood-opacity="0.5"/>
+            </filter>
+          </defs>
+          <rect width="400" height="400" fill="#0a1628"/>
+          <circle cx="80" cy="100" r="60" fill="url(#glowGrad)" opacity="0.3" filter="blur(20px)">
+            <animate attributeName="r" values="60;80;60" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="320" cy="300" r="70" fill="url(#glowGrad)" opacity="0.2" filter="blur(20px)">
+            <animate attributeName="r" values="70;90;70" dur="5s" repeatCount="indefinite"/>
+          </circle>
+          <g filter="url(#shadow)">
+            <path d="M 120 280 L 130 340 L 270 340 L 280 280 Z" fill="#1a2332" stroke="#00f5d4" stroke-width="2"/>
+            <rect x="100" y="100" width="200" height="180" rx="8" fill="#0f1d35" stroke="#00f5d4" stroke-width="3"/>
+            <rect x="110" y="110" width="180" height="160" rx="4" fill="url(#screenGrad)"/>
+            <g opacity="0.9">
+              <rect x="120" y="120" width="40" height="4" fill="#9d4edd" rx="2">
+                <animate attributeName="width" values="40;50;40" dur="3s" repeatCount="indefinite"/>
+              </rect>
+              <rect x="165" y="120" width="60" height="4" fill="#00f5d4" rx="2"/>
+              <rect x="130" y="132" width="50" height="4" fill="#1e90ff" rx="2"/>
+              <rect x="185" y="132" width="35" height="4" fill="#00f5d4" rx="2">
+                <animate attributeName="width" values="35;45;35" dur="2.5s" repeatCount="indefinite"/>
+              </rect>
+              <rect x="130" y="144" width="70" height="4" fill="#00f5d4" rx="2"/>
+              <rect x="120" y="156" width="45" height="4" fill="#9d4edd" rx="2"/>
+              <rect x="170" y="156" width="55" height="4" fill="#1e90ff" rx="2">
+                <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+              </rect>
+              <rect x="130" y="168" width="80" height="4" fill="#00f5d4" rx="2"/>
+              <rect x="120" y="180" width="30" height="4" fill="#1e90ff" rx="2"/>
+              <rect x="155" y="180" width="50" height="4" fill="#9d4edd" rx="2"/>
+              <circle cx="125" cy="200" r="3" fill="#00f5d4">
+                <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+              </circle>
+              <rect x="135" y="198" width="60" height="4" fill="#00f5d4" rx="2">
+                <animate attributeName="width" values="60;80;60" dur="3s" repeatCount="indefinite"/>
+              </rect>
+              <text x="120" y="225" font-family="monospace" font-size="16" fill="#00f5d4" opacity="0.8">&lt;/&gt;</text>
+              <text x="160" y="225" font-family="monospace" font-size="16" fill="#1e90ff" opacity="0.8">{}</text>
+              <text x="190" y="225" font-family="monospace" font-size="16" fill="#9d4edd" opacity="0.8">[]</text>
+            </g>
+            <circle cx="200" cy="108" r="2" fill="#00f5d4" opacity="0.7">
+              <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+          <g opacity="0.6" filter="url(#glow)">
+            <text x="50" y="60" font-family="monospace" font-size="24" fill="#00f5d4" font-weight="bold">
+              &lt;/&gt;
+              <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur="3s" repeatCount="indefinite"/>
+            </text>
+            <text x="330" y="180" font-family="monospace" font-size="20" fill="#1e90ff" font-weight="bold">
+              {}
+              <animateTransform attributeName="transform" type="translate" values="0,0; 0,10; 0,0" dur="4s" repeatCount="indefinite"/>
+            </text>
+            <text x="60" y="340" font-family="monospace" font-size="18" fill="#9d4edd" font-weight="bold">
+              fn()
+              <animateTransform attributeName="transform" type="translate" values="0,0; 0,-8; 0,0" dur="3.5s" repeatCount="indefinite"/>
+            </text>
+          </g>
+          <circle cx="280" cy="120" r="3" fill="#00f5d4" opacity="0.8">
+            <animate attributeName="cy" values="120;80;120" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.8;0.3;0.8" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="150" cy="90" r="2" fill="#1e90ff" opacity="0.6">
+            <animate attributeName="cy" values="90;60;90" dur="5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="310" cy="250" r="2.5" fill="#9d4edd" opacity="0.7">
+            <animate attributeName="cy" values="250;220;250" dur="4.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0.2;0.7" dur="4.5s" repeatCount="indefinite"/>
+          </circle>
+          <g opacity="0.3" font-family="monospace" font-size="12" fill="#00f5d4">
+            <text x="70" y="50">1</text>
+            <text x="70" y="80">0</text>
+            <text x="70" y="110">1</text>
+            <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
+          </g>
+          <g opacity="0.3" font-family="monospace" font-size="12" fill="#1e90ff">
+            <text x="340" y="100">0</text>
+            <text x="340" y="130">1</text>
+            <text x="340" y="160">0</text>
+            <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2.5s" repeatCount="indefinite"/>
+          </g>
+          <ellipse cx="200" cy="340" rx="100" ry="10" fill="url(#glowGrad)" opacity="0.4" filter="blur(15px)">
+            <animate attributeName="opacity" values="0.4;0.6;0.4" dur="3s" repeatCount="indefinite"/>
+          </ellipse>
+        </svg>
+      </div>
+      <div class="header-info">
+        <h1>Amir Hossein Shahedi</h1>
+        <div class="subtitle">Back-end Developer</div>
+        <div class="subtitle">📍 یزد • ایران</div>
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://www.linkedin.com/in/amir-hossein-shahedi/" target="_blank">LinkedIn</a>
+        <a class="btn" href="https://cvbuilder.me/Resume/fa/61afca5c-221a-457c-a7e3-c3082ffb8046?template=Template21" target="_blank">دانلود رزومه</a>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="hero-main">
+        <div class="card">
+          <h3>💡 درباره من</h3>
+          <p>من امیرحسین شاهدی هستم — توسعه‌دهنده بک‌اند و متخصص در سرویس‌های مکانی، داکر، و اپلیکیشن‌های وب. تمرکز من روی ایجاد سیستم‌های مقیاس‌پذیر، بهینه‌سازی عملکرد و پیاده‌سازی معماری‌های مدرن است.</p>
+
+          <section>
+            <h4>🛠 مهارت‌ها</h4>
+            <div class="skills">
+              <span class="skill">Python</span>
+              <span class="skill">Django</span>
+              <span class="skill">FastAPI</span>
+              <span class="skill">PostgreSQL</span>
+              <span class="skill">PostGIS</span>
+              <span class="skill">Docker</span>
+              <span class="skill">Redis</span>
+              <span class="skill">GeoServer</span>
+              <span class="skill">Go</span>
+              <span class="skill">Nginx</span>
+              <span class="skill">Uvicorn</span>
+              <span class="skill">Gunicorn</span>
+            </div>
+          </section>
+
+          <section>
+            <h4>📧 تماس</h4>
+            <p>ایمیل: <span style="color: var(--accent)">amirh3347@gmail.com</span></p>
+            <p>لینکدین: <a class="link" href="https://www.linkedin.com/in/amir-hossein-shahedi/" target="_blank">linkedin.com/in/amir-hossein-shahedi</a></p>
+          </section>
+        </div>
+
+        <div class="card">
+          <h3>🚀 پروژه‌ها و دستاوردها</h3>
+          <ul class="projects">
+            <li><strong>geotajak3 - </strong>زیر ساخت داده مکانی مقایس پذیر مورد استفاده ادارات دولتی و خصوصی</li>
+            <li><strong>geoportal - </strong>نسخه جدید سامانه شهروندی ژئوپورتال مورد استفاده شهرداری ها</li>
+            <li><strong>accident - </strong>نرم افزار یکپارچه سازی داده های تصادفات و تحلیل مورد استفاده در بخش کنترل ترافیک شهرداری</li>
+            <li><strong>Tile Proxy Server</strong> — سرور پروکسی به زبان Go با JWT و Redis برای کش تایل نقشه</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h4>📊 نمای کلی</h4>
+          <p>تجربه در بک‌اند، GIS و DevOps — علاقه‌مند به بهبود عملکرد async، زیرساخت‌های توسعه پذیر و معماری میکروسرویس</p>
+        </div>
+
+        <div class="card" style="margin-top: 16px;">
+          <h4>🎯 دعوت به همکاری</h4>
+          <p style="font-size: 14px;">برای همکاری در پروژه‌های جدید یا مشاوره فنی، خوشحال می‌شوم با شما در ارتباط باشم.</p>
+          <button class="btn" style="width: 100%; margin-top: 12px;" onclick="window.location.href='https://www.linkedin.com/in/amir-hossein-shahedi/'">تماس با من</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="card" style="margin-top: 24px;">
+      <h3>⚡ تکنولوژی‌های مورد استفاده</h3>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+          <div>Python</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django">
+          <div>Django</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI">
+          <div>FastAPI</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+          <div>Docker</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+          <div>PostgreSQL</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
+          <div>Redis</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Go">
+          <div>Go</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx">
+          <div>Nginx</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
+          <div>Linux</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg" alt="Debian">
+          <div>Debian</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fedora/fedora-original.svg" alt="Fedora">
+          <div>Fedora</div>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+          <div>Git</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="two-col">
+      <div class="card">
+        <h3>📚 مهارت‌های تخصصی</h3>
+        <ul style="list-style: none; color: var(--text-secondary); line-height: 2;">
+          <li>✓ پایگاه‌داده: PostgreSQL, PostGIS, MongoDB</li>
+          <li>✓ کش و صف: Redis, Celery</li>
+          <li>✓ سرویس‌های مکانی: GeoServer, TMS, WMS</li>
+          <li>✓ زیرساخت: Docker, Nginx, CI/CD</li>
+          <li>✓ API Development: REST, FastAPI, DRF</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>🎓 علایق و یادگیری</h3>
+        <p>علاقه‌مند به یادگیری تکنولوژی‌های جدید، بهینه‌سازی سیستم‌ها. همیشه به دنبال چالش‌های جدید و فرصت‌های رشد هستم.</p>
+      </div>
+    </div>
+
+    <footer class="card">
+      <p>© 2025 Amir Hossein Shahedi — Portfolio Website</p>
+    </footer>
+  </div>
+</body>
+</html>
