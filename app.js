@@ -51,6 +51,7 @@ const terminalContent = {
     <p class="output-name">Amir Hossein Shahedi</p>
     <p>Backend Engineer <span class="muted">// Geospatial Systems</span></p>
     <div class="output-rule"></div>
+    <p><span class="output-key">experience</span> 5+ years in backend</p>
     <p><span class="output-key">languages</span>  Python, Go, SQL</p>
     <p><span class="output-key">shipping</span>   APIs, GIS, Infrastructure</p>
     <p><span class="output-key">uptime</span>     <span class="terminal-ok">● ready to build</span></p>`,
