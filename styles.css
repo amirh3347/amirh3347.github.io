@@ -125,6 +125,7 @@ button { font: inherit; }
   background: rgba(255,255,255,.025);
   direction: ltr;
   font: 600 10px "IBM Plex Mono", monospace;
+  line-height: 1;
   letter-spacing: .08em;
   cursor: pointer;
   overflow: hidden;
@@ -132,11 +133,13 @@ button { font: inherit; }
 }
 .language-toggle::before { content: ""; position: absolute; inset: 0; background: var(--lime); transform: translateY(102%); transition: transform .3s var(--ease); }
 .language-toggle svg, .language-toggle span { position: relative; z-index: 1; }
-.language-toggle svg { width: 15px; fill: none; stroke: currentColor; stroke-width: 1.4; }
-.language-toggle:hover { color: #081008; border-color: var(--lime); transform: translateY(-2px); }
-.language-toggle:hover::before { transform: translateY(0); }
+.language-toggle svg { width: 15px; display: block; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.4; }
 .language-toggle:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
 .language-toggle:disabled { cursor: wait; }
+@media (hover: hover) and (pointer: fine) {
+  .language-toggle:hover { color: #081008; border-color: var(--lime); transform: translateY(-2px); }
+  .language-toggle:hover::before { transform: translateY(0); }
+}
 .nav__cta {
   min-height: 48px;
   display: flex;
@@ -265,7 +268,7 @@ button { font: inherit; }
 .terminal-tag { position: absolute; z-index: 3; padding: 9px 12px; color: #c9d2ca; border: 1px solid var(--line-strong); border-radius: 8px; background: rgba(16,21,18,.88); box-shadow: 0 10px 30px rgba(0,0,0,.4); backdrop-filter: blur(10px); font: 9px "IBM Plex Mono", monospace; }
 .terminal-tag--api { top: 73px; right: -30px; }
 .terminal-tag--api span { margin-right: 6px; color: var(--mint); }
-.terminal-tag--deploy { bottom: 48px; left: -34px; }
+.terminal-tag--deploy { bottom: -35px; left: 22px; }
 .terminal-tag--deploy i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 8px var(--lime); }
 .terminal__orbit { position: absolute; z-index: 0; border: 1px solid rgba(185,255,102,.12); border-radius: 50%; animation: orbit 18s linear infinite; }
 .terminal__orbit::after { content: ""; position: absolute; top: 50%; left: -3px; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 15px var(--lime); }
@@ -417,6 +420,7 @@ button { font: inherit; }
 @media (max-width: 760px) {
   .shell { width: min(calc(100% - 30px), var(--shell)); }
   .nav { height: 62px; top: 10px; margin-top: 10px; }
+  .language-toggle { height: 46px; align-self: center; }
   .nav__links, .nav__cta { display: none; }
   .menu-button { display: block; }
   .nav.is-open { height: auto; padding-bottom: 14px; flex-wrap: wrap; }
