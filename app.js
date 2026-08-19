@@ -1,5 +1,108 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Cinematic SSH handshake shown while the portfolio finishes rendering underneath.
+const bootScreen = document.querySelector('[data-boot-screen]');
+const bootCommand = document.querySelector('[data-boot-command]');
+const bootLog = document.querySelector('[data-boot-log]');
+const bootIdentity = document.querySelector('[data-boot-identity]');
+const bootProgress = document.querySelector('[data-boot-progress]');
+const bootPercent = document.querySelector('[data-boot-percent]');
+const bootStatus = document.querySelector('[data-boot-status]');
+const bootSkip = document.querySelector('[data-boot-skip]');
+const bootInertTargets = [...document.querySelectorAll('.nav, main, .footer')];
+let bootFinished = false;
+
+bootInertTargets.forEach((element) => { element.inert = true; });
+
+const bootWait = (duration) => new Promise((resolve) => window.setTimeout(resolve, duration));
+
+function setBootProgress(percent, status) {
+  bootProgress.style.transform = `scaleX(${percent / 100})`;
+  bootPercent.textContent = `${percent}%`;
+  bootStatus.textContent = status;
+}
+
+function addBootLogLine(content, modifier = '') {
+  const line = document.createElement('p');
+  if (modifier) line.className = modifier;
+  line.innerHTML = content;
+  bootLog.append(line);
+}
+
+function finishBoot() {
+  if (bootFinished) return;
+  bootFinished = true;
+  document.documentElement.classList.remove('is-booting');
+  document.documentElement.classList.add('is-booted');
+  bootInertTargets.forEach((element) => { element.inert = false; });
+  bootScreen.classList.add('is-leaving');
+  document.removeEventListener('keydown', handleBootKeydown);
+  window.setTimeout(() => { bootScreen.hidden = true; }, reduceMotion ? 30 : 1080);
+}
+
+function handleBootKeydown(event) {
+  if (event.key === 'Escape') finishBoot();
+}
+
+async function typeBootCommand(command) {
+  for (let index = 0; index < command.length; index += 1) {
+    if (bootFinished) return;
+    bootCommand.textContent += command[index];
+    await bootWait(48 + ((index * 17) % 34));
+  }
+}
+
+async function runBootSequence() {
+  if (!bootScreen) {
+    document.documentElement.classList.remove('is-booting');
+    return;
+  }
+
+  if (reduceMotion) {
+    bootCommand.textContent = 'ssh amir.dev';
+    setBootProgress(100, 'SECURE SESSION READY');
+    await bootWait(120);
+    finishBoot();
+    return;
+  }
+
+  await bootWait(340);
+  await typeBootCommand('ssh amir.dev');
+  if (bootFinished) return;
+  setBootProgress(14, 'RESOLVING HOST');
+  await bootWait(190);
+
+  const handshake = [
+    ['Resolving host <code>amir.dev</code>', '', 26, 'RESOLVING HOST'],
+    ['Connection established on port <strong>22</strong>', 'is-success', 43, 'NEGOTIATING PROTOCOL'],
+    ['<code>ED25519</code> host fingerprint verified', 'is-secure', 61, 'VERIFYING IDENTITY'],
+    ['Public key authentication accepted', 'is-success', 78, 'AUTHENTICATING']
+  ];
+
+  for (const [message, modifier, progress, status] of handshake) {
+    if (bootFinished) return;
+    addBootLogLine(message, modifier);
+    setBootProgress(progress, status);
+    await bootWait(210);
+  }
+
+  if (bootFinished) return;
+  bootIdentity.classList.add('is-visible');
+  bootIdentity.setAttribute('aria-hidden', 'false');
+  setBootProgress(91, 'LOADING ENGINEER PROFILE');
+  await bootWait(360);
+
+  if (bootFinished) return;
+  addBootLogLine('Encrypted channel ready · <strong>ACCESS GRANTED</strong>', 'is-secure');
+  setBootProgress(100, 'SECURE SESSION READY');
+  await bootWait(680);
+  finishBoot();
+}
+
+bootSkip?.addEventListener('click', finishBoot);
+document.addEventListener('keydown', handleBootKeydown);
+runBootSequence();
+
 // The document ships in English so the default locale is immediate and SEO-friendly.
 // Capture that source copy once, then swap to the original Persian copy on demand.
 const translatableElements = [...document.querySelectorAll('[data-i18n]')];

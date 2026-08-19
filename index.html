@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="is-booting">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,10 +17,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
-  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+  <noscript><style>.boot-screen{display:none!important}html.is-booting,html.is-booting body{overflow:auto!important}.reveal{opacity:1!important;transform:none!important}</style></noscript>
   <script src="./app.js" defer></script>
 </head>
 <body>
+  <div class="boot-screen" data-boot-screen role="dialog" aria-modal="true" aria-label="Establishing a secure connection to Amir's portfolio">
+    <div class="boot-screen__grid" aria-hidden="true"></div>
+    <div class="boot-screen__glow" aria-hidden="true"></div>
+    <div class="boot-shell">
+      <header class="boot-header">
+        <div class="boot-brand"><span>~/</span> amir.dev</div>
+        <div class="boot-protocol"><i></i> SSH-2.0 · SECURE SESSION</div>
+      </header>
+
+      <div class="boot-terminal">
+        <div class="boot-terminal__bar">
+          <div class="boot-terminal__traffic" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span>visitor@local — zsh</span>
+          <span>80×24</span>
+        </div>
+        <div class="boot-terminal__body">
+          <div class="boot-command-line">
+            <span class="boot-prompt">visitor@local:~$</span>
+            <span data-boot-command></span><i class="boot-caret" aria-hidden="true"></i>
+          </div>
+          <div class="boot-log" data-boot-log aria-live="polite" aria-atomic="false"></div>
+          <div class="boot-identity" data-boot-identity aria-hidden="true">
+            <span class="boot-identity__mark">AS</span>
+            <div><strong>Amir Hossein Shahedi</strong><small>BACKEND ENGINEER · GEOSPATIAL SYSTEMS</small></div>
+            <b><i></i> VERIFIED</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="boot-progress" aria-hidden="true">
+        <div class="boot-progress__meta"><span data-boot-status>INITIALIZING SECURE CHANNEL</span><b data-boot-percent>0%</b></div>
+        <div class="boot-progress__track"><i data-boot-progress></i></div>
+      </div>
+
+      <footer class="boot-footer">
+        <span>YAZD, IR · 31.8974° N / 54.3569° E</span>
+        <button type="button" data-boot-skip>SKIP INTRO <kbd>ESC</kbd></button>
+      </footer>
+    </div>
+  </div>
+
   <a class="skip-link" href="#main" data-i18n="skipLink">Skip to main content</a>
   <div class="ambient" aria-hidden="true">
     <div class="ambient__grid"></div>
